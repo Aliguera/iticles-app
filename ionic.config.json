@@ -1,5 +1,7 @@
 {
   "name": "iticles-app",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

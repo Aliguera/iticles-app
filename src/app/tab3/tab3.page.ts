@@ -1,3 +1,4 @@
+import { NavController } from '@ionic/angular';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,6 +8,10 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
-  constructor() {}
+  constructor(private navCtrl: NavController) {}
 
+  logout() {
+    window.localStorage.clear();
+    this.navCtrl.navigateRoot('login');
+  }
 }

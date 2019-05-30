@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ article.title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-img [src]="article.picture_path"></ion-img>
+  <div padding>
+    <h1>{{ article.title }}</h1>
+    <p style="word-wrap: break-word;">
+      {{ article.body }}
+    </p>
+    <ion-button expand="block">Favorite<ion-icon name="star" slot="end"></ion-icon></ion-button>
+  </div>
+</ion-content>
