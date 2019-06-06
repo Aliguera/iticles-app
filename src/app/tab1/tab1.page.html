@@ -3,11 +3,22 @@
     <ion-title>
       Articles
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="article-create" routerDirection="forward">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="ion-padding">
+    <ion-item>
+      <ion-label>Filter</ion-label>
+      <ion-select placeholder="Select One">
+        <ion-select-option *ngFor="let category of categories" (click)="filter(category.value)"  value="category.value">{{ category.category }}</ion-select-option>
+      </ion-select>
+    </ion-item>
     <ion-card *ngFor="let article of articles" >
       <ion-card-header>
         <ion-img [src]="article.picture_path"></ion-img>

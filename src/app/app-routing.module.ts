@@ -15,7 +15,7 @@ const routes: Routes = [
       article: DataResolverService
     },
     loadChildren: './article-details/article-details.module#ArticleDetailsPageModule' },
-  { path: 'article-create', loadChildren: './article-create/article-create.module#ArticleCreatePageModule' }
+  { path: 'tabs/tab1/article-create', loadChildren: './article-create/article-create.module#ArticleCreatePageModule' }
 ];
 @NgModule({
   imports: [

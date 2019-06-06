@@ -1,9 +1,27 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>article-create</ion-title>
+    <ion-title>Create Article</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  
+<ion-content padding>
+    <ion-item>
+      <ion-label>Title</ion-label>
+      <ion-input [(ngModel)]="article.title"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Body</ion-label>
+      <textarea [(ngModel)]="article.body" rows="4"></textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label>Subject</ion-label>
+      <ion-select [(ngModel)]="article.subject" placeholder="Select a subject" okText="Okay" cancelText="Dismiss">
+        <ion-select-option value="food">Food</ion-select-option>
+        <ion-select-option value="medicine">Medicine</ion-select-option>
+        <ion-select-option value="technology">Technology</ion-select-option>
+        <ion-select-option value="other">Other</ion-select-option>
+      </ion-select>
+    </ion-item>
+  <ion-button (click)="photoActionSheet()" expand="block" color="primary">Article Picture</ion-button>
+  <ion-button (click)="createArticle()" expand="block" color="primary">Submit</ion-button>
 </ion-content>
