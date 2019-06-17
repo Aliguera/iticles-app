@@ -15,13 +15,18 @@
   <div class="ion-padding">
     <ion-item>
       <ion-label>Filter</ion-label>
-      <ion-select placeholder="Select One">
-        <ion-select-option *ngFor="let category of categories" (click)="filter(category.value)"  value="category.value">{{ category.category }}</ion-select-option>
+      <ion-select placeholder="Select One" [(ngModel)]="subjectValue" (ionChange)="filter(subjectValue)">
+          <ion-select-option value="a">All</ion-select-option>
+          <ion-select-option value="f">Food</ion-select-option>
+          <ion-select-option value="m">Medicine</ion-select-option>
+          <ion-select-option value="t">Techonology</ion-select-option>
+          <ion-select-option value="o">Other</ion-select-option>
       </ion-select>
     </ion-item>
+    <h4 class="ion-text-center">{{ articles.length }} articles found</h4>
     <ion-card *ngFor="let article of articles" >
-      <ion-card-header>
-        <ion-img [src]="article.picture_path"></ion-img>
+      <ion-card-header *ngIf="article.picture_path">
+        <ion-img class="article-image" [src]="article.picture_path"></ion-img>
       </ion-card-header>
     
       <ion-card-content>

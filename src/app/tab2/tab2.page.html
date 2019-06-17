@@ -6,4 +6,29 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label>Filter</ion-label>
+    <ion-select placeholder="Select One" [(ngModel)]="subjectValue" (ionChange)="filter(subjectValue)">
+        <ion-select-option value="a">All</ion-select-option>
+        <ion-select-option value="f">Food</ion-select-option>
+        <ion-select-option value="m">Medicine</ion-select-option>
+        <ion-select-option value="t">Techonology</ion-select-option>
+        <ion-select-option value="o">Other</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <h4 class="ion-text-center">{{ favoriteArticlesList.length }} articles found</h4>
+  <ion-card *ngFor="let article of favoriteArticlesList" >
+    <ion-card-header *ngIf="article.picture_path">
+      <ion-img [src]="article.picture_path"></ion-img>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <h1>{{ article.title }}</h1>
+      <p>
+        {{ wrapString(article.body) }}
+      </p>
+      <ion-button (click)="openDetails(article)" expand="block">View</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

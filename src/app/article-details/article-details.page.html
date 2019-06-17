@@ -1,16 +1,20 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>{{ article.title }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-img [src]="article.picture_path"></ion-img>
+  <ion-img *ngIf="article.picture_path"  [src]="article.picture_path"></ion-img>
   <div padding>
     <h1>{{ article.title }}</h1>
     <p style="word-wrap: break-word;">
       {{ article.body }}
     </p>
-    <ion-button expand="block">Favorite<ion-icon name="star" slot="end"></ion-icon></ion-button>
+    <ion-button *ngIf="!articleFavorited" expand="block" (click)="favorite()">Favorite<ion-icon name="star" slot="end"></ion-icon></ion-button>
+    <ion-button color="danger" *ngIf="articleFavorited" expand="block" (click)="unfavorite()">Unfavorite<ion-icon name="star" slot="end"></ion-icon></ion-button>
   </div>
 </ion-content>

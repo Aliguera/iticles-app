@@ -1,9 +1,9 @@
 export interface Article {
-    id?: number;
+    id?: string;
     title: string;
     body: string;
-    created_at?: string;
+    created_at?: number;
     picture_path: string;
     subject: string;
-    userId?: string;
+    userID?: string;
 }

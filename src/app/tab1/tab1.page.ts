@@ -1,7 +1,7 @@
 import { Article } from 'src/models/article';
 import { DataService } from './../services/data.service';
 import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { NavController, LoadingController } from '@ionic/angular';
 import { Component } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { NavigationExtras } from '@angular/router/src/router';
@@ -17,26 +17,34 @@ export class Tab1Page {
 
   articles: any = [];
   backupArticles: any = [];
-  categories: any = [
-                      { category: 'Food', value: 'f' },
-                      { category: 'Medicine', value: 'm' },
-                      { category: 'Technology', value: 't' },
-                      { category: 'Other', value: 'o' }
+  subjecties: any = [
+                      { subject: 'Food', value: 'f' },
+                      { subject: 'Medicine', value: 'm' },
+                      { subject: 'Technology', value: 't' },
+                      { subject: 'Other', value: 'o' }
                     ];
+  subjectValue: any = '';
 
   constructor(private ofAuth: AngularFireAuth,
               private navCtrl: NavController,
               private router: Router,
               private dataService: DataService,
-              private articleService: ArticleService) {
+              private articleService: ArticleService,
+              private loadingCtrl: LoadingController) {
               }
 
-  ionViewWillEnter() {
-    this.ofAuth.authState.subscribe(data => { console.log("kdoawopd" + data.email)});
+  async ionViewWillEnter() {
+    const loadingElement = await this.loadingCtrl.create({
+      message: 'Loading articles...',
+      spinner: 'crescent',
+      duration: 2000
+    });
+    loadingElement.present();
     this.articleService.getArticles().valueChanges().subscribe(res => {
       console.log(res);
       this.articles = res;
       this.backupArticles = res;
+      loadingElement.dismiss();
     });
   }
 
@@ -54,32 +62,33 @@ export class Tab1Page {
     this.router.navigateByUrl('/article-details/' + article.id);
   }
 
-  filter(categoryValue) {
-    switch (categoryValue) {
+  filter(subjectValue) {
+    console.log(this.articles);
+    switch (subjectValue) {
       case 'a':
         this.articles = this.backupArticles;
         break;
       case 'f':
-        this.articles.filter(element => {
-          element.category = 'Food';
+        this.articles = this.backupArticles.filter(element => {
+          return element.subject == 'food';
         });
         break;
 
       case 'm':
-        this.articles.filter(element => {
-          element.category = 'Medicine';
+        this.articles = this.backupArticles.filter(element => {
+          return element.subject == 'medicine';
         });
         break;
 
       case 't':
-        this.articles.filter(element => {
-          element.category = 'Technology';
+        this.articles = this.backupArticles.filter(element => {
+          return element.subject == 'technology';
         });
         break;
-    
+
       default:
-        this.articles.filter(element => {
-          element.category = 'Other';
+        this.articles = this.backupArticles.filter(element => {
+          return element.subject == 'other';
         });
         break;
     }
