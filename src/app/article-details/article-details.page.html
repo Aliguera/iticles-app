@@ -8,12 +8,10 @@
 </ion-header>
 
 <ion-content>
-  <ion-img *ngIf="article.picture_path"  [src]="article.picture_path"></ion-img>
+  <ion-img [src]="article.picture_path ? article.picture_path : '../../assets/imgs/articles/icon.png'"></ion-img>
   <div padding>
     <h1>{{ article.title }}</h1>
-    <p style="word-wrap: break-word;">
-      {{ article.body }}
-    </p>
+    <p style="word-wrap: break-word;" innerHTML="{{ article.body }}"></p>
     <ion-button *ngIf="!articleFavorited" expand="block" (click)="favorite()">Favorite<ion-icon name="star" slot="end"></ion-icon></ion-button>
     <ion-button color="danger" *ngIf="articleFavorited" expand="block" (click)="unfavorite()">Unfavorite<ion-icon name="star" slot="end"></ion-icon></ion-button>
   </div>

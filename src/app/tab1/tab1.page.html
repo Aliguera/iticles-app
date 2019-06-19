@@ -25,8 +25,8 @@
     </ion-item>
     <h4 class="ion-text-center">{{ articles.length }} articles found</h4>
     <ion-card *ngFor="let article of articles" >
-      <ion-card-header *ngIf="article.picture_path">
-        <ion-img class="article-image" [src]="article.picture_path"></ion-img>
+      <ion-card-header>
+        <ion-img class="article-image" [src]="article.picture_path ? article.picture_path : '../../assets/imgs/articles/icon.png'"></ion-img>
       </ion-card-header>
     
       <ion-card-content>
